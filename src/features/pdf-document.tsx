@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
 });
 
 export default function PdfDocument({ details, items, calculateTotal }) {
-  const { date, invoiceNumber, billTo, address, notes } = details;
+  const { date, invoiceNumber, vatReg, billTo, address, notes } = details;
 
   return (
     <Document>
@@ -101,13 +101,27 @@ export default function PdfDocument({ details, items, calculateTotal }) {
         </View>
         <View style={styles.section}>
           <Text style={styles.subHeading}>Bill To</Text>
-          <View style={{ marginBottom: "12px", gap: "4px" }}>
-            <Text>Client Name</Text>
-            <Text style={{ color: "#777777" }}>{billTo}</Text>
-          </View>
-          <View style={{ gap: "4px" }}>
-            <Text>Billing Address</Text>
-            <Text style={{ color: "#777777" }}>{address}</Text>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <View>
+              <View style={{ marginBottom: "12px", gap: "4px" }}>
+                <Text>Client Name</Text>
+                <Text style={{ color: "#777777" }}>{billTo}</Text>
+              </View>
+              <View style={{ gap: "4px" }}>
+                <Text>Billing Address</Text>
+                <Text style={{ color: "#777777" }}>{address}</Text>
+              </View>
+            </View>
+            <View>
+              {vatReg && (
+                <View style={{ gap: "4px", alignItems: "flex-end" }}>
+                  <Text>VAT Reg No</Text>
+                  <Text style={{ color: "#777777" }}>{vatReg}</Text>
+                </View>
+              )}
+            </View>
           </View>
         </View>
         <View style={styles.section}>

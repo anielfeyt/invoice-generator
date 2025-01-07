@@ -59,6 +59,8 @@ export default function CreateInvoice() {
     { description: "", quantity: 1, price: 0 },
   ]);
   const [details, setDetails] = useState({
+    vatReg: "",
+    // vatNumber: "",
     invoiceNumber: "",
     date: new Date().toLocaleDateString(),
     billTo: "",
@@ -155,7 +157,6 @@ export default function CreateInvoice() {
                   <PdfDocument
                     details={details}
                     items={items}
-                    calculateSubtotal={calculateSubtotal}
                     calculateTotal={calculateTotal}
                   />
                 }
@@ -208,6 +209,32 @@ export default function CreateInvoice() {
                 />
                 <HelperText show={!!errors.date}>{errors.date}</HelperText>
               </div>
+              <div className="space-y-2">
+                <Label htmlFor="vatReg">VAT Reg No</Label>
+                <Input
+                  id="vatReg"
+                  placeholder=""
+                  onChange={(e) => {
+                    updateDetails("vatReg", e.target.value);
+                    setErrors({ ...errors, vatReg: "" });
+                  }}
+                />
+                <HelperText show={!!errors.vatReg}>{errors.vatReg}</HelperText>
+              </div>
+              {/* <div className="space-y-2">
+                <Label htmlFor="vatNumber">VAT No</Label>
+                <Input
+                  id="vatNumber"
+                  placeholder=""
+                  onChange={(e) => {
+                    updateDetails("vatNumber", e.target.value);
+                    setErrors({ ...errors, vatNumber: "" });
+                  }}
+                />
+                <HelperText show={!!errors.vatNumber}>
+                  {errors.vatNumber}
+                </HelperText>
+              </div> */}
             </div>
 
             <Separator />
